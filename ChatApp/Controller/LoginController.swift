@@ -106,6 +106,7 @@ class LoginController: UIViewController {
         iv.image = UIImage(named: "gameofthrones_splash")
         iv.translatesAutoresizingMaskIntoConstraints = false
         iv.contentMode = .scaleAspectFill
+        iv.clipsToBounds = true
         iv.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectProfileImageView)))
         iv.isUserInteractionEnabled = true
         return iv

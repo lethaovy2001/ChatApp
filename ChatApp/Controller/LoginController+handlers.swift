@@ -24,7 +24,7 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
                 return
             }
             
-            
+            self.handleRegister()
             guard let uid = user?.uid else {
                 return
             }
