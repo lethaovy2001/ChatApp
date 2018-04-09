@@ -31,8 +31,10 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
             
             // Upload image into Firebase Storage
             let imageName = UUID().uuidString
-            let storageRef = Storage.storage().reference().child("myImage.png").child("profile_images").child("\(imageName).png")
-            if let profileImage = self.profileImageView.image, let uploadData = UIImageJPEGRepresentation(profileImage, 0.1) {
+            let storageRef = Storage.storage().reference().child("myImage.png").child("profile_images").child("\(imageName).jpg")
+            if let profileImage = self.profileImageView.image,
+                
+                let uploadData = UIImageJPEGRepresentation(profileImage, 0.1) {
                 
                 
                 storageRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
@@ -67,6 +69,8 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
             }
             
             print("****** Successfully save user in Firebase")
+            self.messagesController?.navigationItem.title = values["name"] as? String
+            
             self.dismiss(animated: true, completion: nil)
         })
     }

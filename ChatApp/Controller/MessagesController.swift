@@ -60,6 +60,7 @@ class MessagesController: UITableViewController {
 
         
         let loginController = LoginController()
+        loginController.messagesController = self
         present(loginController, animated: true, completion: nil)
     }
     

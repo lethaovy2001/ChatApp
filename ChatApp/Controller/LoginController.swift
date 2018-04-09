@@ -10,6 +10,8 @@ import UIKit
 import Firebase
 
 class LoginController: UIViewController {
+    
+    var messagesController: MessagesController?
 
     let inputsContainerView: UIView = {
         let view = UIView()
@@ -57,6 +59,7 @@ class LoginController: UIViewController {
             }
             
             print("***** Successfully login with Firebase")
+            self.messagesController?.fetchUserAndSetupNavBarTitle()
             self.dismiss(animated: true, completion: nil)
             
         })
@@ -65,6 +68,7 @@ class LoginController: UIViewController {
     let nameTextField: UITextField = {
         let tf = UITextField()
         tf.placeholder = "Name"
+       tf.autocorrectionType = .no
         tf.translatesAutoresizingMaskIntoConstraints = false
         return tf
     }()
@@ -215,6 +219,8 @@ class LoginController: UIViewController {
         //MARK: emailTextField
         emailTextField.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor, constant: 12).isActive = true
         emailTextField.topAnchor.constraint(equalTo: nameSeparatorView.topAnchor).isActive = true
+        
+        emailTextField.bottomAnchor.constraint(equalTo: emailSeparatorView.topAnchor).isActive = true
         emailTextField.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
         emailTextFieldHeightAnchor = emailTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: 1/3)
         emailTextFieldHeightAnchor?.isActive = true
@@ -228,6 +234,9 @@ class LoginController: UIViewController {
         //MARK: passwordTextField
         passwordTextField.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor, constant: 12).isActive = true
         passwordTextField.topAnchor.constraint(equalTo: emailSeparatorView.topAnchor).isActive = true
+        
+        passwordTextField.bottomAnchor.constraint(equalTo: inputsContainerView.bottomAnchor).isActive = true
+        
         passwordTextField.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
         passwordTextFieldHeightAnchor = emailTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: 1/3)
         passwordTextFieldHeightAnchor?.isActive = true
