@@ -69,7 +69,11 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
             }
             
             print("****** Successfully save user in Firebase")
-            self.messagesController?.navigationItem.title = values["name"] as? String
+            //self.messagesController?.navigationItem.title = values["name"] as? String
+            
+            let user = User()
+            user.setValuesForKeys(values)
+            self.messagesController?.setupNavBarWithUser(user: user)
             
             self.dismiss(animated: true, completion: nil)
         })
