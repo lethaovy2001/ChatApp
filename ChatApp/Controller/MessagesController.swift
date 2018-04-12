@@ -19,10 +19,53 @@ class MessagesController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "new_message_icon"), style: .plain, target: self, action: #selector(handleNewMessage))
         
         checkIfUserIsLoggedIn()
+        
+        observeMessages()
+        
+        
+    }
+    
+    var messages = [Message]()
+    
+    func observeMessages() {
+        let ref = Database.database().reference().child("messages")
+        ref.observe(.childAdded, with: { (snapshot) in
+            
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+                
+                let message = Message(dictionary: dictionary)
+                self.messages.append(message)
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+                
+                
+            }
+            
+            
+            print(snapshot)
+            
+        }, withCancel: nil)
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return messages.count
+
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cellId")
+        let message = messages[indexPath.row]
+        cell.textLabel?.text = message.text
+        cell.detailTextLabel?.text = message.toId
+        return cell
     }
     
     @objc func handleNewMessage() {
         let newMessageController = NewMessageController()
+        newMessageController.messagesController = self
         let navController = UINavigationController(rootViewController: newMessageController)
         present(navController, animated: true, completion: nil)
     }
@@ -46,8 +89,8 @@ class MessagesController: UITableViewController {
             //this dictionary contains name, email, profileImageUrl
             if let dictionary = snapshot.value as? [String: AnyObject] {
                 //self.navigationItem.title = dictionary["name"] as? String
-                let user = User()
-                user.setValuesForKeys(dictionary)
+                
+                let user = User(dictionary: dictionary)
                 self.setupNavBarWithUser(user: user)
             }
             
@@ -55,9 +98,8 @@ class MessagesController: UITableViewController {
     }
 
     func setupNavBarWithUser(user: User) {
-        let titleView = UIView()
-        titleView.frame = CGRect(x: 0, y: 0, width: 100, height: 40)
-        titleView.backgroundColor = UIColor.red
+        let titleView = UIButton()
+        titleView.frame = CGRect(x: 0, y: 0, width: 200, height: 40)
         
         let containerView = UIView()
         containerView.translatesAutoresizingMaskIntoConstraints = false
@@ -97,7 +139,15 @@ class MessagesController: UITableViewController {
         
         self.navigationItem.titleView = titleView
         
+        //titleView.addTarget(self, action: #selector(showChatController), for: .touchUpInside)
         
+        
+    }
+    
+    @objc func showChatControllerForUser(user: User) {
+        let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
+        chatLogController.user = user
+        navigationController?.pushViewController(chatLogController, animated: true)
     }
     
     @objc func handleLogout() {

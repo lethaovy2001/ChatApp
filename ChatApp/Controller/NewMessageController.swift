@@ -29,7 +29,8 @@ class NewMessageController: UITableViewController {
         Database.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
 
             if let dictonary = snapshot.value as? [String: AnyObject] {
-                let user = User()
+                let user = User(dictionary: dictonary)
+                user.id = snapshot.key
                 user.setValuesForKeys(dictonary)
                 self.users.append(user)
                 
@@ -75,6 +76,18 @@ class NewMessageController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 72
     }
+    
+    var messagesController: MessagesController?
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let user = self.users[indexPath.row]
+        
+        dismiss(animated: true, completion: nil)
+        self.messagesController?.showChatControllerForUser(user: user)
+    }
+    
+    
 
 
 }

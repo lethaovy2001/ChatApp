@@ -20,6 +20,7 @@
 		387F329320797F8300F60180 /* LoginController+handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387F329220797F8300F60180 /* LoginController+handlers.swift */; };
 		387F32972079C6BB00F60180 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387F32962079C6BB00F60180 /* Extensions.swift */; };
 		387F3299207C477200F60180 /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387F3298207C477200F60180 /* ChatLogController.swift */; };
+		387F329B207C7C9400F60180 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387F329A207C7C9400F60180 /* Message.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		387F329220797F8300F60180 /* LoginController+handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginController+handlers.swift"; sourceTree = "<group>"; };
 		387F32962079C6BB00F60180 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		387F3298207C477200F60180 /* ChatLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogController.swift; sourceTree = "<group>"; };
+		387F329A207C7C9400F60180 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		4A2708BA1F4E9F4B23A40867 /* Pods-ChatApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChatApp/Pods-ChatApp.release.xcconfig"; sourceTree = "<group>"; };
 		8D5D7DC76B38C8B085D47BAE /* Pods_ChatApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA714E4885CD2B039801647E /* Pods-ChatApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChatApp/Pods-ChatApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				387F328E2079670D00F60180 /* User.swift */,
+				387F329A207C7C9400F60180 /* Message.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 				387F3299207C477200F60180 /* ChatLogController.swift in Sources */,
 				387F328C207962BE00F60180 /* NewMessageController.swift in Sources */,
 				384C943F20782E5000D65786 /* MessagesController.swift in Sources */,
+				387F329B207C7C9400F60180 /* Message.swift in Sources */,
 				387F32972079C6BB00F60180 /* Extensions.swift in Sources */,
 				384C94502078308600D65786 /* LoginController.swift in Sources */,
 				387F328F2079670D00F60180 /* User.swift in Sources */,
