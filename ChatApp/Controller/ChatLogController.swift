@@ -20,6 +20,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate {
     lazy var inputTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Enter message..."
+        textField.autocorrectionType = false
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.delegate = self
         return textField
