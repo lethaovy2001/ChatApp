@@ -14,21 +14,7 @@ class UserCell: UITableViewCell {
     var message: Message? {
         didSet {
             
-            if let toId = message?.toId {
-                let ref = Database.database().reference().child("users").child(toId)
-                ref.observeSingleEvent(of: .value, with: { (snapshot) in
-                    
-                    if let dictionary = snapshot.value as? [String:AnyObject] {
-                        print(snapshot)
-                        self.textLabel?.text = dictionary["name"] as? String
-                        
-                        if let profileImageUrl = dictionary["porfileImageUrl"] as? String {
-                            self.profileImageView.loadImageUsingCacheWithUrlString(urlString: profileImageUrl)
-                        }
-                    }
-                    
-                }, withCancel: nil)
-            }
+            setupNameAndProfileImage()
             
             detailTextLabel?.text = message?.text
             
@@ -38,6 +24,27 @@ class UserCell: UITableViewCell {
                 dateFormatter.dateFormat = "hh:mm:ss a"
                 timeLabel.text = dateFormatter.string(from: timestampDate as Date)
             }
+        }
+    }
+    
+    private func setupNameAndProfileImage() {
+        
+        if let id = message?.chatPartnerId() {
+            let ref = Database.database().reference().child("users").child(id)
+            ref.observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                
+                
+                if let dictionary = snapshot.value as? [String:AnyObject] {
+                    print(snapshot)
+                    self.textLabel?.text = dictionary["name"] as? String
+                    
+                    if let profileImageUrl = dictionary["profileImageUrl"] as? String {
+                        self.profileImageView.loadImageUsingCacheWithUrlString(urlString: profileImageUrl)
+                    }
+                }
+                
+            }, withCancel: nil)
         }
     }
     
@@ -55,9 +62,7 @@ class UserCell: UITableViewCell {
     
     let profileImageView: UIImageView = {
         let iv = UIImageView()
-        iv.image = UIImage(named: "nedstark")
         iv.contentMode = .scaleAspectFill
-        //iv.clipsToBounds = true
         iv.layer.cornerRadius = 24
         iv.layer.masksToBounds = true
         iv.translatesAutoresizingMaskIntoConstraints = false
@@ -67,7 +72,6 @@ class UserCell: UITableViewCell {
     
     let timeLabel: UILabel = {
         let label = UILabel()
-        label.text = "HH:MM:SS"
         label.font = UIFont.systemFont(ofSize: 13)
         label.textColor = UIColor.lightGray
         label.translatesAutoresizingMaskIntoConstraints = false
