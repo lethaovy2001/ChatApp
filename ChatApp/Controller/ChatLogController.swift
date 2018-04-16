@@ -173,12 +173,38 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         let message = messages[indexPath.item]
         cell.textView.text = message.text
         
+        setupCell(cell: cell, message: message)
+        
         // modify the bubbleView's width
         cell.bubbleWidthAnchor?.constant = estimatedFrameForText(text: message.text!).width + 32
         
         
         
         return cell
+    }
+    
+    private func setupCell(cell: ChatMessageCell, message: Message) {
+        
+        if let profileImageUrl = self.user?.profileImageUrl {
+            cell.profileImageView.loadImageUsingCacheWithUrlString(urlString: profileImageUrl)
+        }
+        
+        if message.fromId == Auth.auth().currentUser?.uid {
+            
+            //Bubble blue
+            cell.bubbleView.backgroundColor = ChatMessageCell.blueColor
+            cell.textView.textColor = UIColor.white
+            cell.profileImageView.isHidden = true
+            cell.bubbleViewLeftAnchor?.isActive = false
+            cell.profileImageView.isHidden = true
+        } else {
+            // Bubble gray
+            cell.bubbleView.backgroundColor = UIColor(r: 240, g: 240, b: 240)
+            cell.textView.textColor = UIColor.black
+            cell.bubbleViewRightAnchor?.isActive = false
+            cell.bubbleViewLeftAnchor?.isActive = true
+            cell.profileImageView.isHidden = false
+        }
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

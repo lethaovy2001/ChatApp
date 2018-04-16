@@ -25,7 +25,6 @@ class MessagesController: UITableViewController {
         
         tableView.register(UserCell.self, forCellReuseIdentifier: cellId)
         
-        //observeMessages()
         observeUserMessage()
         
         
@@ -58,10 +57,10 @@ class MessagesController: UITableViewController {
                         })
                         
                     }
+                    
+                    self.timer?.invalidate()
+                    self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
 
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
                     
                     
                 }
@@ -71,40 +70,17 @@ class MessagesController: UITableViewController {
         }, withCancel: nil)
     }
     
+    var timer: Timer?
+    
+    @objc func handleReloadTable() {
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
     var messages = [Message]()
     var messagesDictionary = [String: Message]()
-    
-    func observeMessages() {
-        let ref = Database.database().reference().child("messages")
-        ref.observe(.childAdded, with: { (snapshot) in
-            
-            if let dictionary = snapshot.value as? [String: AnyObject] {
-                
-                let message = Message(dictionary: dictionary)
-                
-                
-                if let toId = message.toId {
-                    self.messagesDictionary[toId] = message
-                    self.messages = Array(self.messagesDictionary.values)
-                    self.messages.sort( by: { (message1, message2) -> Bool in
-                        return (message1.timestamp?.int32Value)! > (message2.timestamp?.int32Value)!
-                    })
-                    
-                }
-                
-                
-                
-                
-                
-                
-                
-            }
-            
-            
-            print(snapshot)
-            
-        }, withCancel: nil)
-    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messages.count
