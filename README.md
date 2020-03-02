@@ -40,4 +40,5 @@ The left corner button allows user to log out of the app.
 ..* UIKit
 ..* Firebase Real-time Database 
 ..* AVFoundation
+⋅⋅* la
 
