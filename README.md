@@ -19,9 +19,9 @@ You can chat with the contact of you choosing.
 ### Send messages, images and videos
 You can type message in the text box, send images and videos in your library. 
 The chat message will be updated in real-time.
-![Chat App Demo](Demo/CA3.gif)
+![Chat App Demo](Demo/CA4.gif)
 
 ### Log out 
 The left corner button allows user to log out of the app.
-![Chat App Demo](Demo/CA4.gif)
+![Chat App Demo](Demo/CA5.gif)
 
