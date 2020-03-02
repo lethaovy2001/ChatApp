@@ -57,7 +57,6 @@ class LoginController: UIViewController {
                 print("***** Unable to login with Firebase \(String(describing: error))")
                 return
             }
-            
             print("***** Successfully login with Firebase")
             self.messagesController?.fetchUserAndSetupNavBarTitle()
             self.dismiss(animated: true, completion: nil)
@@ -115,8 +114,6 @@ class LoginController: UIViewController {
         iv.isUserInteractionEnabled = true
         return iv
     }()
-    
-
     
     lazy var loginRegisterSegmentedControl: UISegmentedControl = {
         let sc = UISegmentedControl(items: ["Login", "Register"])
@@ -254,8 +251,6 @@ class LoginController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-    
-
 }
 
 

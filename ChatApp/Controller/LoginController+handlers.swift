@@ -36,7 +36,6 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
                 
                 let uploadData = UIImageJPEGRepresentation(profileImage, 0.1) {
                 
-                
                 storageRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
                     
                     if error != nil {
@@ -45,9 +44,9 @@ extension LoginController: UIImagePickerControllerDelegate, UINavigationControll
                     }
                     
                     if let profileImageUrl = metadata?.downloadURL()?.absoluteString {
-                        
+
                         let values = ["name": name, "email": email, "profileImageUrl": profileImageUrl]
-                        
+
                         self.registerUserIntoDatabaseWithUID(uid: uid, values: values as [String : AnyObject])
                     }
                 })
