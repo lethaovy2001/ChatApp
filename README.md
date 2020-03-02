@@ -37,8 +37,7 @@ The left corner button allows user to log out of the app.
 ![Chat App Demo](Demo/CA5.gif)
 
 ## Built With
-..* UIKit
-..* Firebase Real-time Database 
-..* AVFoundation
-⋅⋅* la
+* UIKit
+* Firebase Real-time Database 
+* AVFoundation
 
