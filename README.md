@@ -9,7 +9,8 @@ User can click on the logo to change their profile picture
 
 ## Messages
 ### View an existed chat message
-The previous chat message are updated in real-time using Firebase Real-time Database. You can see the previous chat message by clicking on it. 
+The previous chat message are updated in real-time using Firebase Real-time Database. 
+You can see the previous chat message by clicking on it. 
 ![Chat App Demo](Demo/CA2.gif)
 
 ### Start a new chat message 
@@ -18,6 +19,7 @@ You can chat with the contact of you choosing.
 
 ### Send messages, images and videos
 You can type message in the text box, send images and videos in your library. 
+
 The chat message will be updated in real-time.
 ![Chat App Demo](Demo/CA4.gif)
 
